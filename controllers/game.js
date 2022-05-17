@@ -8,18 +8,18 @@ const API_PATH = 'https://test.ipdb.io/api/v1/'
 const conn = new BigChainDB.Connection(API_PATH)
 
 const createSingleAsset = async ({ asset, metadata, publicKey, privateKey }) => {
-    const txCreatePaint = BigchainDB.Transaction.makeCreateTransaction(
+    const txCreatePaint = BigChainDB.Transaction.makeCreateTransaction(
         asset,
         metadata,
         [
-            BigchainDB.Transaction.makeOutput(
-                BigchainDB.Transaction.makeEd25519Condition(publicKey),
+            BigChainDB.Transaction.makeOutput(
+                BigChainDB.Transaction.makeEd25519Condition(publicKey),
             ),
         ],
         publicKey,
     )
 
-    const txSigned = BigchainDB.Transaction.signTransaction(txCreatePaint, privateKey)
+    const txSigned = BigChainDB.Transaction.signTransaction(txCreatePaint, privateKey)
 
     let assetCreated = await conn.postTransactionCommit(txSigned)
 
@@ -49,11 +49,10 @@ router.post('/', async (req, res, next) => {
         privateKey: req.body.privateKey,
     })
 
-    res.status(200).json({
-        // mnemonic: mnemonic,
-        // private: user.privateKey,
-        // public: user.publicKey,
-    });
+    console.log("asset_created")
+    console.log(assetCreated)
+
+    res.status(200).json(assetCreated);
 });
 
 module.exports = router;
