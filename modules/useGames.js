@@ -23,7 +23,36 @@ const useGames = () => {
 
         return assetCreated ?? {}
     }
-    return { createSingleAsset }
+
+    const updateSingleAsset = async ({ txCreatedID, publicKey, privateKey, metadata }) => {
+        let txCreated = await conn.getTransaction(txCreatedID)
+
+        const updatedBuilding = BigChainDB.Transaction.makeTransferTransaction(
+            [
+                {
+                    tx: txCreated,
+                    output_index: 0,
+                },
+            ],
+            [
+                BigChainDB.Transaction.makeOutput(
+                    BigChainDB.Transaction.makeEd25519Condition(publicKey),
+                ),
+            ],
+            metadata,
+        )
+
+        const signedTransfer = BigChainDB.Transaction.signTransaction(
+            updatedBuilding,
+            privateKey,
+        )
+
+        let assetTransfered = await conn.postTransactionCommit(signedTransfer)
+
+        return assetTransfered ?? {}
+    }
+
+    return { createSingleAsset, updateSingleAsset }
 }
 
 module.exports = useGames
