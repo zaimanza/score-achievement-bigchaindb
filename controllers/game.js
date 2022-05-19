@@ -13,7 +13,7 @@ router.get('/', async (req, res, next) => {
     // get all player games
     const assetsModel = await Assets()
 
-    console.log(await assetsModel.find().toArray())
+    const fetchedData = await assetsModel.find().toArray()
     // const fetchedAssets = await db.collection('assets').find()
     // check if playerGamesExist req.body.publicKey
     // if exist (!playerGamesExist) return empty string
@@ -21,7 +21,7 @@ router.get('/', async (req, res, next) => {
     // return player games
 
     res.status(200).json({
-        mnemonic: "hello",
+        assets: fetchedData,
         // private: user.privateKey,
         // public: user.publicKey,
     });
