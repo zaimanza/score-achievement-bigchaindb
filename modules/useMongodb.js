@@ -45,9 +45,8 @@ const useMongodb = () => {
 
     const Assets = async () => {
 
-        assetsModel = await db.collection('assets')
         // console.log(await assetsModel.find().toArray())
-        return assetsModel
+        return await db.collection('assets')
     }
 
     return { connectDB, Assets }
