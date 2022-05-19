@@ -1,5 +1,10 @@
 const http = require('http');
 const app = require('./app');
+const useMongodb = require("./modules/useMongodb");
+
+const { connectDB } = useMongodb()
+
+connectDB()
 
 const port = process.env.PORT || 3000;
 

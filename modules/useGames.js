@@ -2,7 +2,7 @@ const BigChainDB = require('bigchaindb-driver');
 const bip39 = require('bip39');
 
 const useGames = () => {
-    const API_PATH = 'https://test.ipdb.io/api/v1/'
+    const API_PATH = 'http://bigchaindb.appserver.projectoasis.io:9984/api/v1/'
     const conn = new BigChainDB.Connection(API_PATH)
 
     const createSingleAsset = async ({ asset, metadata, publicKey, privateKey }) => {

@@ -2,13 +2,19 @@ const express = require('express');
 const bip39 = require('bip39');
 const BigChainDB = require('bigchaindb-driver');
 const useGames = require('../modules/useGames');
+const useMongodb = require('../modules/useMongodb');
 const router = express.Router();
 
 const { createSingleAsset, updateSingleAsset } = useGames()
 
+const { Assets } = useMongodb()
+
 router.get('/', async (req, res, next) => {
     // get all player games
+    const assetsModel = await Assets()
 
+    console.log(await assetsModel.find().toArray())
+    // const fetchedAssets = await db.collection('assets').find()
     // check if playerGamesExist req.body.publicKey
     // if exist (!playerGamesExist) return empty string
 
