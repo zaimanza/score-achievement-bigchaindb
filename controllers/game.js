@@ -25,7 +25,19 @@ router.get('/', async (req, res, next) => {
         let fetchedFull = []
 
         for (const transaction of fetchedTransactions) {
-            fetchedFull.push(await fetchLatestTransaction(transaction.id))
+            let latestTransaction = await fetchLatestTransaction(transaction.id)
+
+            const dataAsset = await assetsModel.find({
+                "id": transaction.id,
+            }, { projection: { data: 1, _id: 0 } }).toArray()
+
+            console.log(dataAsset[0].data)
+
+            latestTransaction = await {
+                ...latestTransaction,
+                asset: dataAsset[0].data
+            }
+            fetchedFull.push(latestTransaction)
         }
 
         res.status(200).json(fetchedFull);
