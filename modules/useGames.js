@@ -2,7 +2,7 @@ const BigChainDB = require('bigchaindb-driver');
 const bip39 = require('bip39');
 
 const useGames = () => {
-    const API_PATH = 'http://bigchaindb.appserver.projectoasis.io:9984/api/v1/'
+    const API_PATH = 'http://13.215.249.21:9984/api/v1/'
     const conn = new BigChainDB.Connection(API_PATH)
 
     const createSingleAsset = async ({ asset, metadata, publicKey, privateKey }) => {
@@ -19,6 +19,7 @@ const useGames = () => {
         )
         const txSigned = BigChainDB.Transaction.signTransaction(txCreatePaint, privateKey)
         console.log("asset_creating")
+        console.log(txSigned)
         let assetCreated = await conn.postTransactionCommit(txSigned)
         console.log("asset_created")
         console.log(assetCreated)

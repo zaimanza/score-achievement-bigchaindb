@@ -22,7 +22,7 @@ const useMongodb = () => {
             //     })
             // })
 
-            client = new MongoClient("mongodb://bigchaindb.appserver.projectoasis.io:27017/bigchain")
+            client = new MongoClient("mongodb://13.215.249.21:27017/bigchain")
             await client.connect();
             console.log('Connected successfully to server');
             db = await client.db('bigchain');

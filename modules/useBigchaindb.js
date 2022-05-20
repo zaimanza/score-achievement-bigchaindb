@@ -2,7 +2,7 @@ const axios = require('axios').default
 
 const useBigchaindb = () => {
 
-    const API_PATH = 'http://bigchaindb.appserver.projectoasis.io:9984/api/v1/'
+    const API_PATH = 'http://13.215.249.21:9984/api/v1/'
     const fetchLatestTransaction = async (assetId) => {
         try {
             // console.log(assetId)

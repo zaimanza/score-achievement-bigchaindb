@@ -29,6 +29,7 @@ router.get('/', async (req, res, next) => {
 
             const dataAsset = await assetsModel.find({
                 "id": transaction.id,
+
             }, { projection: { data: 1, _id: 0 } }).toArray()
 
             console.log(dataAsset[0].data)
